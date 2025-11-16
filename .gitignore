@@ -1,0 +1,5 @@
+# ignore any directory named "target" anywhere in the repo
+target/
+
+# macOS metadata
+.DS_Store
