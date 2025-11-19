@@ -1,3 +1,5 @@
+use core::u8;
+
 use pinocchio::{ProgramResult, account_info::AccountInfo, entrypoint, instruction::{Seed, Signer}, nostd_panic_handler, program_error::ProgramError, pubkey::{Pubkey, find_program_address}};
 use pinocchio_system::instructions::Transfer;
  
@@ -11,7 +13,7 @@ impl<'a> TryFrom<&'a [AccountInfo]> for WithdrawAccounts<'a> {
     type Error = ProgramError;
  
     fn try_from(accounts: &'a [AccountInfo]) -> Result<Self, Self::Error> {
-        let [owner, vault, _] = accounts else {
+        let [owner, vault,_] = accounts else {
             return Err(ProgramError::NotEnoughAccountKeys);
         };
  
