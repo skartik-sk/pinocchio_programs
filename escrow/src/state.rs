@@ -1,26 +1,22 @@
+use core::mem::{size_of, transmute};
 use pinocchio::{program_error::ProgramError, pubkey::Pubkey};
-use core::mem::{
-    size_of,
-    transmute,
-};
 #[repr(C)]
 pub struct Escrow {
-    pub seed: u64,        
-    pub maker: Pubkey,   
-    pub mint_a: Pubkey,  
-    pub mint_b: Pubkey,   
-    pub receive: u64,     
-    pub bump: [u8;1]      
+    pub seed: u64,
+    pub maker: Pubkey,
+    pub mint_a: Pubkey,
+    pub mint_b: Pubkey,
+    pub receive: u64,
+    pub bump: [u8; 1],
 }
 
-
 impl Escrow {
-    pub const LEN: usize = size_of::<u64>() 
-    + size_of::<Pubkey>() 
-    + size_of::<Pubkey>() 
-    + size_of::<Pubkey>() 
-    + size_of::<u64>()
-    + size_of::<[u8;1]>();
+    pub const LEN: usize = size_of::<u64>()
+        + size_of::<Pubkey>()
+        + size_of::<Pubkey>()
+        + size_of::<Pubkey>()
+        + size_of::<u64>()
+        + size_of::<[u8; 1]>();
 
     #[inline(always)]
     pub fn load_mut(bytes: &mut [u8]) -> Result<&mut Self, ProgramError> {
@@ -64,17 +60,24 @@ impl Escrow {
     }
 
     #[inline(always)]
-    pub fn set_bump(&mut self, bump: [u8;1]) {
+    pub fn set_bump(&mut self, bump: [u8; 1]) {
         self.bump = bump;
     }
     #[inline(always)]
-        pub fn set_inner(&mut self, seed: u64, maker: Pubkey, mint_a: Pubkey, mint_b: Pubkey, receive: u64, bump: [u8;1]) {
-            self.seed = seed;
-            self.maker = maker;
-            self.mint_a = mint_a;
-            self.mint_b = mint_b;
-            self.receive = receive;
-            self.bump = bump;
-        }
-    
+    pub fn set_inner(
+        &mut self,
+        seed: u64,
+        maker: Pubkey,
+        mint_a: Pubkey,
+        mint_b: Pubkey,
+        receive: u64,
+        bump: [u8; 1],
+    ) {
+        self.seed = seed;
+        self.maker = maker;
+        self.mint_a = mint_a;
+        self.mint_b = mint_b;
+        self.receive = receive;
+        self.bump = bump;
+    }
 }
