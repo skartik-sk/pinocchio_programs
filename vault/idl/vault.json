@@ -1,0 +1,70 @@
+{
+  "version": "0.1.0",
+  "name": "vault",
+  "instructions": [
+    {
+      "name": "Deposit",
+      "accounts": [
+        {
+          "name": "ownerAcc",
+          "isMut": true,
+          "isSigner": true,
+          "docs": [
+            "Fee payer account"
+          ]
+        },
+        {
+          "name": "vaultAcc",
+          "isMut": true,
+          "isSigner": true,
+          "docs": [
+            "vault account"
+          ]
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false,
+          "docs": [
+            "System program account"
+          ]
+        }
+      ],
+      "args": [],
+      "discriminant": {
+        "type": "u8",
+        "value": 0
+      }
+    },
+    {
+      "name": "Withdraw",
+      "accounts": [
+        {
+          "name": "ownerAcc",
+          "isMut": true,
+          "isSigner": true,
+          "docs": [
+            "Fee payer account"
+          ]
+        },
+        {
+          "name": "vaultAcc",
+          "isMut": true,
+          "isSigner": false,
+          "docs": [
+            "vault account"
+          ]
+        }
+      ],
+      "args": [],
+      "discriminant": {
+        "type": "u8",
+        "value": 1
+      }
+    }
+  ],
+  "metadata": {
+    "origin": "shank",
+    "address": "22222222222222222222222222222222222222222222"
+  }
+}

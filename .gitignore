@@ -4,3 +4,5 @@ target/
 # macOS metadata
 .DS_Store
 mollusk/
+
+node_modules/

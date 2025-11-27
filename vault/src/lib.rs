@@ -1,7 +1,7 @@
 #![no_std]
  
 use pinocchio::{ProgramResult, account_info::AccountInfo, entrypoint, nostd_panic_handler, program_error::ProgramError, pubkey::{Pubkey, find_program_address}};
- 
+
 entrypoint!(process_instruction);
 nostd_panic_handler!();
  
@@ -29,4 +29,20 @@ fn process_instruction(
         _ => Err(ProgramError::InvalidInstructionData),
     }
 }
+
+    use shank::ShankInstruction;
+
+
+
+    #[derive(ShankInstruction)]
+     enum _MyProgramInstruction{
+        #[account(0, writable, signer, name = "owner_acc", desc = "Fee payer account")]
+        #[account(1, writable, signer, name = "vault_acc", desc = "vault account")]
+        #[account(2, name = "system_program", desc = "System program account")]
+        Deposit,
+        
+        #[account(0, writable, signer, name = "owner_acc", desc = "Fee payer account")]
+        #[account(1, writable, name = "vault_acc", desc = "vault account")]
+        Withdraw,
+    }
 

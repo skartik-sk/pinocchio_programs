@@ -1,5 +1,6 @@
 use pinocchio::{ProgramResult, account_info::AccountInfo, entrypoint, nostd_panic_handler, program_error::ProgramError, pubkey::{Pubkey, find_program_address}};
 use pinocchio_system::instructions::Transfer;
+use shank::ShankType;
 
 
 pub struct DepositAccounts<'a> { 
