@@ -4,7 +4,7 @@ Solana contract built using the Pinocchio framework.
 
 | Folder     | Done    | Tests   | IDL |
 |------------|:-------:|:-------:|:----:|
-| vault/  | ✅ | ✅ ||
+| vault/  | ✅ | ✅ |✅|
 | escrow/  | ✅ | Pending ||
 |Secp256r1-vault/ | ✅ | Pending||
 | flash loan/   | Pending | Pending ||
