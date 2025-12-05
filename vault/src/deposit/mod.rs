@@ -1,6 +1,7 @@
-use pinocchio::{ProgramResult, account_info::AccountInfo, entrypoint, nostd_panic_handler, program_error::ProgramError, pubkey::{Pubkey, find_program_address}};
+use pinocchio::{ProgramResult, account_info::AccountInfo, entrypoint, msg, nostd_panic_handler, program_error::ProgramError, pubkey::{Pubkey, find_program_address, log}, };
+use pinocchio_pubkey::pubkey;
 use pinocchio_system::instructions::Transfer;
-use shank::ShankType;
+// use shank::ShankType;
 
 
 pub struct DepositAccounts<'a> { 
@@ -15,7 +16,6 @@ impl<'a> TryFrom<&'a [AccountInfo]> for DepositAccounts<'a> {
         let [owner, vault, _] = accounts else {
             return Err(ProgramError::NotEnoughAccountKeys);
         };
- 
         // Accounts Checks
         if !owner.is_signer() {
             return Err(ProgramError::InvalidAccountOwner);
@@ -24,13 +24,18 @@ impl<'a> TryFrom<&'a [AccountInfo]> for DepositAccounts<'a> {
         if !vault.is_owned_by(&pinocchio_system::ID) {
             return Err(ProgramError::InvalidAccountOwner);
         }
+        
+
  
         if vault.lamports().ne(&0) {
             return Err(ProgramError::InvalidAccountData);
         }
- 
+
         let (vault_key, _) = find_program_address(&[b"vault", owner.key()], &crate::ID);
+        log(vault.key());
+        log(&vault_key);
         if vault.key().ne(&vault_key) {
+            msg!("vault key mismatch");
             return Err(ProgramError::InvalidAccountOwner);
         }
  

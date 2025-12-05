@@ -2,7 +2,7 @@ use core::u8;
 
 use pinocchio::{ProgramResult, account_info::AccountInfo, entrypoint, instruction::{Seed, Signer}, nostd_panic_handler, program_error::ProgramError, pubkey::{Pubkey, find_program_address}};
 use pinocchio_system::instructions::Transfer;
-use shank::ShankType;
+// use shank::ShankType;
 
 
 pub struct WithdrawAccounts<'a> {
