@@ -35,7 +35,7 @@ export async function createClient(): Promise<Client> {
         const wallet = await generateKeyPairSigner();
         await airdrop({
             recipientAddress: wallet.address,
-            lamports: lamports(1_000_000_000n),
+            lamports: lamports(100_000_000n),
             commitment: 'confirmed',
         });
  

@@ -59,8 +59,8 @@ const vaultAccount2 = await getProgramDerivedAddress({
                 new Uint8Array([118, 97, 117, 108, 116])
               ), addressEncoder.encode( client.wallet.address)],
 })
-const vaultAccount = await getProgramDerivedAddress({
-    programAddress:address("22222222222222222222222222222222222222222222"),
+let vaultAccount = await getProgramDerivedAddress({
+    programAddress,
     seeds:
      [
       'vault', addressEncoder.encode( client.wallet.address)],
@@ -85,7 +85,7 @@ console.log(client.wallet.address)
                     role: AccountRole.READONLY,
                 },
             ],
-            data:getDepositInstructionData(100000000n)
+            data:getDepositInstructionData(10000000n)
             
         }
      ]
@@ -104,7 +104,9 @@ console.log(client.wallet.address)
  
     // Send the transaction and wait for confirmation.
     await client.sendAndConfirmTransaction(transaction, { commitment: 'confirmed' }); 
+    const { value: vaultBalance } = await client.rpc.getBalance(vaultAccount[0]).send();
     const { value: newBalance } = await client.rpc.getBalance(client.wallet.address).send();
+    console.log(`vault Balance: ${vaultBalance} lamports.`);
     console.log(`New Balance: ${newBalance} lamports.`);
 
 
@@ -121,7 +123,7 @@ console.log(client.wallet.address)
                 },
                 {
                     address: vaultAccount[0],
-                    role:AccountRole.WRITABLE
+                    role:AccountRole.WRITABLE   
                 },
                {
                     address: address('11111111111111111111111111111111'), 
