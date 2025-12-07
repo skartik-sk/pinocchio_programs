@@ -27,9 +27,6 @@ impl<'a> TryFrom<&'a [AccountInfo]> for DepositAccounts<'a> {
         
 
  
-        if vault.lamports().ne(&0) {
-            return Err(ProgramError::InvalidAccountData);
-        }
 
         let (vault_key, _) = find_program_address(&[b"vault", owner.key()], &crate::ID);
         log(vault.key());

@@ -27,7 +27,7 @@ import {
     getBytesEncoder,
 } from '@solana/kit';
 import { createClient } from './clients';
-function getDepositInstructionData(amount: bigint) {
+function getInstructionData(amount: bigint) {
     const buffer = new ArrayBuffer(9); // 1 byte (discriminator) + 8 bytes (amount)
     const view = new DataView(buffer);
     
@@ -44,7 +44,7 @@ function getWithdrawInstructionData() {
     return new Uint8Array(buffer);
 }
 async function test() {
-  const client = await createClient();
+  const client = await createClient("localnet");
     const { value: balance } = await client.rpc.getBalance(client.wallet.address).send();
     console.log(`Balance: ${balance} lamports.`);
 let latestBlockhash =    (await client.rpc.getLatestBlockhash().send()).value
@@ -68,6 +68,7 @@ let vaultAccount = await getProgramDerivedAddress({
 // const vaultAccount =await generateKeyPairSigner();
 console.log(vaultAccount)
 console.log(client.wallet.address)
+
      const programTx :Instruction[]=[
         {
             programAddress,
@@ -85,7 +86,7 @@ console.log(client.wallet.address)
                     role: AccountRole.READONLY,
                 },
             ],
-            data:getDepositInstructionData(10000000n)
+            data:getInstructionData(10000000n)
             
         }
      ]
@@ -130,7 +131,7 @@ console.log(client.wallet.address)
                     role: AccountRole.READONLY,
                 },
             ],
-            data:getWithdrawInstructionData()
+            data:getInstructionData(1000000n)
             
         }
      ]

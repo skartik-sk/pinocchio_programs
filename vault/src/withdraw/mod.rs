@@ -42,18 +42,47 @@ impl<'a> TryFrom<&'a [AccountInfo]> for WithdrawAccounts<'a> {
 }
 
 
-pub struct Withdraw<'a> {
-    pub accounts: WithdrawAccounts<'a>,
+
+pub struct WithdrawInstructionData {
+    pub amount: u64,
 }
  
-impl<'a> TryFrom<&'a [AccountInfo]> for Withdraw<'a> {
+impl<'a> TryFrom<&'a [u8]> for WithdrawInstructionData {
     type Error = ProgramError;
  
-    fn try_from(accounts: &'a [AccountInfo]) -> Result<Self, Self::Error> {
-        let accounts = WithdrawAccounts::try_from(accounts)?;
+    fn try_from(data: &'a [u8]) -> Result<Self, Self::Error> {
+        if data.len() != size_of::<u64>() {
+            return Err(ProgramError::InvalidInstructionData);
+        }
  
-        Ok(Self { accounts })
+        let amount = u64::from_le_bytes(data.try_into().unwrap());
+ 
+        // Instruction Checks
+        if amount.eq(&0) {
+            return Err(ProgramError::InvalidInstructionData);
+        }
+ 
+        Ok(Self { amount })
     }
+}
+
+
+
+ 
+pub struct Withdraw<'a> {
+    pub accounts: WithdrawAccounts<'a>,
+    pub instruction_data: WithdrawInstructionData,
+}
+ 
+impl<'a> TryFrom<(&'a [u8],&'a [AccountInfo])> for Withdraw<'a> {
+    type Error = ProgramError;
+    fn try_from((data, accounts): (&'a [u8], &'a [AccountInfo])) -> Result<Self, Self::Error> {
+        let accounts = WithdrawAccounts::try_from(accounts)?;
+        let instruction_data = WithdrawInstructionData::try_from(data)?;
+ 
+        Ok(Self { accounts, instruction_data })
+    }
+    
 }
  
 impl<'a> Withdraw<'a> {
@@ -72,7 +101,7 @@ impl<'a> Withdraw<'a> {
         Transfer {
             from: self.accounts.vault,
             to: self.accounts.owner,
-            lamports: self.accounts.vault.lamports(),
+            lamports: self.instruction_data.amount,
         }
         .invoke_signed(&signers)?;
  
