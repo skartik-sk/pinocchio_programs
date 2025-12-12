@@ -9,6 +9,7 @@ import {
         signTransactionMessageWithSigners,
         Instruction,
         address,
+        AccountRole,
     } from '@solana/kit';
     import { createClient } from '../../clients';
     function getInstructionData(amount: bigint) {
@@ -26,7 +27,7 @@ import {
         console.log(`Balance: ${balance} lamports.`);
     let latestBlockhash =    (await client.rpc.getLatestBlockhash().send()).value
     
-    const programAddress = address('CoCuSdpYGSnNHXtwTkCSvEGf4WMDYfkmMof26NMmNzDF');
+    const programAddress = address('Cbga24YNQ6gEbYuPRv1aEcaCrW7GqHEi1vB1Y5vRNMrb');
     
     
     console.log(client.wallet.address)
@@ -35,9 +36,17 @@ import {
             {
                 programAddress,
                 accounts: [
+                  {
+                    address:client.wallet.address,
+                    role:AccountRole.WRITABLE_SIGNER
+                  },
+                  {
+                    address:programAddress,
+                    role:AccountRole.READONLY
+                  }
                    
                 ],
-                data:getInstructionData(10000000n)
+                data:getInstructionData(0n)
                 
             }
          ]
