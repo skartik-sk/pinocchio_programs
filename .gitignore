@@ -9,3 +9,5 @@ node_modules/
 test-ledger/
 vault/client/converter.js
 vault/client/converter.js
+.surfpool/
+converter.js
