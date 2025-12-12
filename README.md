@@ -20,10 +20,10 @@ Fundamental Solana program examples for learning.
 
 | Program     | Done    | Tests   |
 |------------|:-------:|:-------:|
-| account-data | Pending | Pending |
-| checking-accounts | Pending | Pending |
-| close-account | Pending | Pending |
-| counter | Pending | Pending |
+| account-data | ✅ | ✅ |
+| checking-accounts | ✅ | ✅ |
+| close-account | ✅ | ✅ |
+| counter | ✅ | ✅ |
 | create-account | Pending | Pending |
 | cross-program-invocation | Pending | Pending |
 | favorites | Pending | Pending |
