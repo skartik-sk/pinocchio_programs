@@ -1,13 +1,6 @@
 [workspace]
 resolver="3"
-members = [
-"account-data",
-    "checking-accounts",
-]
-
-default-members = [
-"checking-accounts",
-]
+members = ["hello-solana"]
 
 [workspace.dependencies]
 # pinocchio
