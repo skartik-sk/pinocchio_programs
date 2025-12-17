@@ -24,10 +24,10 @@ Fundamental Solana program examples for learning.
 | checking-accounts | ✅ | ✅ |
 | close-account | ✅ | ✅ |
 | counter | ✅ | ✅ |
-| create-account | Pending | Pending |
-| cross-program-invocation | Pending | Pending |
+| create-account | ✅ | ✅ |
+| cross-program-invocation | ✅ | ✅ |
 | favorites | Pending | Pending |
-| hello-solana | Pending | Pending |
+| hello-solana | ✅ | ✅|
 | pda-rent-payer | Pending | Pending |
 | processing-instructions | Pending | Pending |
 | program-derived-addresses | Pending | Pending |
