@@ -1,0 +1,18 @@
+[package]
+name = "repository-layout"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+pinocchio.workspace= true
+pinocchio-log.workspace = true
+pinocchio-system.workspace = true
+bytemuck.workspace=true
+shank = "0.4.6"
+
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[features]
+no-entrypoint = []
