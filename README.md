@@ -28,13 +28,13 @@ Fundamental Solana program examples for learning.
 | cross-program-invocation | ✅ | ✅ |
 | favorites | Pending | Pending |
 | hello-solana | ✅ | ✅|
-| pda-rent-payer | Pending | Pending |
+| pda-rent-payer | ✅ | Pending |
 | processing-instructions | Pending | Pending |
-| program-derived-addresses | Pending | Pending |
+| program-derived-addresses | ✅ | ✅ |
 | realloc | Pending | Pending |
-| rent | Pending | Pending |
-| repository-layout | Pending | Pending |
-| transfer-sol | Pending | Pending |
+| rent | ✅ | ✅ |
+| repository-layout | ✅ | ✅ |
+| transfer-sol | ✅ | ✅ |
 
 ## Token Programs
 
