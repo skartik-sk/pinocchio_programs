@@ -16,7 +16,7 @@ fn process_instruction(
        log!("Processing instruction {}", instruction_data);
        log!("crate.io {}", _program_id);
        match instruction_data.split_first() {
-           Some((0,data))=>process_transfer_program(accounts,data)?,
+           Some((0,data))=>process_transfer_program(accounts,data)?,//only for progrom owner account 
            Some((1,data))=>process_trasfer_cpi(accounts,data)?,
            _=>return Err(ProgramError::InvalidInstructionData)
            

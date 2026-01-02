@@ -27,15 +27,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2551bf44bc5f776c15044b9b94153a00198be06743e262afaaa61f11ac7523a5"
 
 [[package]]
-name = "hello-solana"
-version = "0.1.0"
-dependencies = [
- "pinocchio",
- "pinocchio-log",
- "pinocchio-system",
-]
-
-[[package]]
 name = "memchr"
 version = "2.7.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -95,6 +86,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5ee95bc4ef87b8d5ba32e8b7714ccc834865276eab0aed5c9958d00ec45f49e8"
 dependencies = [
  "unicode-ident",
+]
+
+[[package]]
+name = "program-derived-addresses"
+version = "0.1.0"
+dependencies = [
+ "pinocchio",
+ "pinocchio-log",
+ "pinocchio-system",
 ]
 
 [[package]]

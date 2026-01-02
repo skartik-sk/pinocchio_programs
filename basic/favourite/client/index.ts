@@ -9,10 +9,6 @@ import {
         signTransactionMessageWithSigners,
         Instruction,
         address,
-        AccountRole,
-        generateKeyPairSigner,
-        addSignersToTransactionMessage,
-        getAddressEncoder,
     } from '@solana/kit';
     import { createClient } from '../../clients';
     function getInstructionData(amount: bigint) {
@@ -26,43 +22,26 @@ import {
     }
     async function test() {
       const client = await createClient("localnet");
-    console.log(client.wallet.address)
         const { value: balance } = await client.rpc.getBalance(client.wallet.address).send();
         console.log(`Balance: ${balance} lamports.`);
-        
     let latestBlockhash =    (await client.rpc.getLatestBlockhash().send()).value
     
-    const programAddress = address('Atqt8U2XJL6MqAJ2gRMmwVVaKkMNY9EuCARwcN3PHsnZ');
-    let reciverAcc= await generateKeyPairSigner()
-    console.log(reciverAcc.address)
-    const { value: balance1 } = await client.rpc.getBalance(reciverAcc.address).send();
+    const programAddress = address('CoCuSdpYGSnNHXtwTkCSvEGf4WMDYfkmMof26NMmNzDF');
     
-    console.log(`Balance: ${balance1} lamports.`);
     
-    const systemProgram = address("11111111111111111111111111111111");
-
+    console.log(client.wallet.address)
+    
          const programTx :Instruction[]=[
             {
                 programAddress,
                 accounts: [
-                   {
-                     address:client.wallet.address,
-                     role:AccountRole.WRITABLE_SIGNER
-                     },
-                   {
-                     address:reciverAcc.address,
-                     role:AccountRole.WRITABLE
-                   },
-                   {
-                     address:systemProgram,
-                     role:AccountRole.READONLY
-                   }
+                   
                 ],
-                data:new Uint8Array([1,0,0,0,0,0,0,0,100])
+                data:getInstructionData(10000000n)
                 
             }
          ]
-         // console.log("program tx" , programTx)
+         console.log("program tx" , programTx)
         const transactionMessage =  pipe(
             createTransactionMessage({ version: 0 }),
             (tx) => setTransactionMessageFeePayerSigner(client.wallet, tx),
@@ -71,20 +50,17 @@ import {
             // (tx) => client.estimateAndSetComputeUnitLimit(tx),
         );
         
-        // console.log("trasection message", transactionMessage)
+        console.log("trasection message", transactionMessage)
      
         // Compile the transaction message and sign it.
         const transaction = await signTransactionMessageWithSigners(transactionMessage);
         assertIsSendableTransaction(transaction);
          assertIsTransactionWithBlockhashLifetime(transaction);
-     // console.log("trasection", transaction)
+     console.log("trasection", transaction)
         // Send the transaction and wait for confirmation.
         await client.sendAndConfirmTransaction(transaction, { commitment: 'confirmed' }); 
         const { value: newBalance } = await client.rpc.getBalance(client.wallet.address).send();
         console.log(`New Balance: ${newBalance} lamports.`);
-        
-        const { value: newBalance2 } = await client.rpc.getBalance(reciverAcc.address).send();
-        console.log(`New Balance user: ${newBalance2} lamports.`);
     }
     
     

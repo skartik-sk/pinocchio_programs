@@ -1,6 +1,6 @@
 [workspace]
-resolver="3"
-members = ["hello-solana"]
+resolver="2"
+members = ["program-derived-addresses"]
 
 [workspace.dependencies]
 # pinocchio
@@ -8,3 +8,4 @@ pinocchio = "0.9.2"
 pinocchio-log = "0.4.0"
 pinocchio-system = "0.4.0"
 pinocchio-pubkey = "0.3.0"
+bytemuck = { version = "1.23.0", features = ["derive"] }

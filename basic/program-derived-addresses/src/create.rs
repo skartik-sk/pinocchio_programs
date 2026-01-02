@@ -1,5 +1,5 @@
-use pinocchio::{ProgramResult, account_info::AccountInfo, instruction::Seed, program_error::{INCORRECT_PROGRAM_ID, ProgramError}, pubkey::{Pubkey, find_program_address}, sysvars::{Sysvar, rent::Rent}};
-use pinocchio_system::instructions::CreateAccountWithSeed;
+use pinocchio::{ProgramResult, account_info::AccountInfo, instruction::{AccountMeta, Seed}, program_error::{INCORRECT_PROGRAM_ID, ProgramError}, pubkey::{Pubkey, find_program_address}, sysvars::{Sysvar, rent::Rent}};
+use pinocchio_system::instructions::{CreateAccount, CreateAccountWithSeed};
 
 use crate::state::PageVisits;
 
@@ -10,22 +10,20 @@ pub fn create_state(
     accounts: &[AccountInfo],
     instruction_data: &[u8],
 )->ProgramResult{
-    let [owner, _]= accounts else {
+    let [owner, pda,_]= accounts else {
         return Err(ProgramError::NotEnoughAccountKeys)
     };
-    let seeds = [    Seed::from(b"page_viste"),Seed::from(owner.key())];
-    let (pda,bump)=find_program_address(&seeds ,program_id);
+    let seeds = [   Seed::from(b"page_visite") ,Seed::from(owner.key())];
+    let (_,bump)=find_program_address(&[    b"page_viste",owner.key()] ,program_id);
     let rent = Rent::get()?.minimum_balance(PageVisits::SPACE);
-    Seed::from(value)
-    CreateAccountWithSeed{
-        from:owner,
-        to:pda,
-        seed:seeds,
-        lamports:rent,
-        space:5,
-        owner:program_id,
-        
-    };
-    
+ CreateAccount{
+            from:owner,
+            to:pda,
+            lamports:rent,
+            space:5,
+            owner:program_id,
+            
+        }.invoke_signed([owner]) ?;
+ pda.new(bump)?;
     Ok(())
 }
