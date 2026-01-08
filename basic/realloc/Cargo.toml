@@ -1,5 +1,5 @@
 [package]
-name = "favourite"
+name = "realloc"
 version = "0.1.0"
 edition = "2021"
 
@@ -7,6 +7,6 @@ edition = "2021"
 pinocchio.workspace= true
 pinocchio-log.workspace = true
 pinocchio-system.workspace = true
-bytemuck.workspace=true
+
 [lib]
 crate-type = ["cdylib", "rlib"]

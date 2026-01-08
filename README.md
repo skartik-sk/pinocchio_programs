@@ -10,7 +10,7 @@ Solana contract built using the Pinocchio framework.
 | flash loan/   | Pending | Pending |
 | amm/      | Pending | Pending |
 | Quantum-vault | ✅ | Pending |
-| [basics/](#basics-programs) | Pending | Pending |
+| [basics/](#basics-programs) | ✅ | ⚠️ |
 | [tokens/](#token-programs) | Pending | Pending |
 | [token-2022/](#token-2022-extensions) | Pending | Pending |
 
@@ -26,12 +26,12 @@ Fundamental Solana program examples for learning.
 | counter | ✅ | ✅ |
 | create-account | ✅ | ✅ |
 | cross-program-invocation | ✅ | ✅ |
-| favorites | Pending | Pending |
+| favorites | ✅ | ✅ |
 | hello-solana | ✅ | ✅|
 | pda-rent-payer | ✅ | Pending |
-| processing-instructions | Pending | Pending |
+| processing-instructions | ✅ | ✅ |
 | program-derived-addresses | ✅ | ✅ |
-| realloc | Pending | Pending |
+| realloc | ✅ | Pending |
 | rent | ✅ | ✅ |
 | repository-layout | ✅ | ✅ |
 | transfer-sol | ✅ | ✅ |

@@ -1,29 +1,38 @@
-use pinocchio::{ProgramResult, account_info::AccountInfo, instruction::{AccountMeta, Seed}, program_error::{INCORRECT_PROGRAM_ID, ProgramError}, pubkey::{Pubkey, find_program_address}, sysvars::{Sysvar, rent::Rent}};
+use pinocchio::{ProgramResult, account_info::AccountInfo, instruction::{AccountMeta, Seed, Signer}, log, msg, program_error::{INCORRECT_PROGRAM_ID, ProgramError}, pubkey::{Pubkey, find_program_address}, sysvars::{Sysvar, rent::Rent}};
+use pinocchio_log::log;
 use pinocchio_system::instructions::{CreateAccount, CreateAccountWithSeed};
 
 use crate::state::PageVisits;
-
-
-
 pub fn create_state(
      program_id: &Pubkey,
     accounts: &[AccountInfo],
     instruction_data: &[u8],
 )->ProgramResult{
-    let [owner, pda,_]= accounts else {
+    let [payer , user, pda,_]= accounts else {
         return Err(ProgramError::NotEnoughAccountKeys)
     };
-    let seeds = [   Seed::from(b"page_visite") ,Seed::from(owner.key())];
-    let (_,bump)=find_program_address(&[    b"page_viste",owner.key()] ,program_id);
+let bump =    &instruction_data[4..5];
+
+ let seeds = [
+     Seed::from(PageVisits::SEED.as_bytes()),
+     Seed::from(user.key().as_ref()),
+     Seed::from(bump),
+ ];
+
+ let signers = Signer::from(&seeds);
+    
     let rent = Rent::get()?.minimum_balance(PageVisits::SPACE);
- CreateAccount{
-            from:owner,
+        CreateAccount{
+            from:payer,
             to:pda,
             lamports:rent,
-            space:5,
+            space:PageVisits::SPACE as u64,
             owner:program_id,
-            
-        }.invoke_signed([owner]) ?;
- pda.new(bump)?;
+        }.invoke_signed(&[signers]) ?;
+ pda.try_borrow_mut_data()?.copy_from_slice(&instruction_data);
     Ok(())
 }
+
+
+
+    

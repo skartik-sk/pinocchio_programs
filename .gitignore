@@ -11,3 +11,9 @@ vault/client/converter.js
 vault/client/converter.js
 .surfpool/
 converter.js
+
+runbooks/
+shank/
+generate-codama.ts
+txtx.yml
+.vscode

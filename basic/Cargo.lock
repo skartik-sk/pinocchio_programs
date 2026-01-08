@@ -89,21 +89,21 @@ dependencies = [
 ]
 
 [[package]]
-name = "program-derived-addresses"
-version = "0.1.0"
-dependencies = [
- "pinocchio",
- "pinocchio-log",
- "pinocchio-system",
-]
-
-[[package]]
 name = "quote"
 version = "1.0.42"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a338cc41d27e6cc6dce6cefc13a0729dfbb81c262b1f519331575dd80ef3067f"
 dependencies = [
  "proc-macro2",
+]
+
+[[package]]
+name = "realloc"
+version = "0.1.0"
+dependencies = [
+ "pinocchio",
+ "pinocchio-log",
+ "pinocchio-system",
 ]
 
 [[package]]

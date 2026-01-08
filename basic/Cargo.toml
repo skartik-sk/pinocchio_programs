@@ -1,6 +1,6 @@
 [workspace]
 resolver="2"
-members = ["program-derived-addresses"]
+members = ["realloc"]
 
 [workspace.dependencies]
 # pinocchio

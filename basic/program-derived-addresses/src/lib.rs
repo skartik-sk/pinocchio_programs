@@ -18,8 +18,8 @@ fn process_instruction(
        log!("Processing instruction {}", instruction_data);
        log!("crate.io {}", _program_id);
        match instruction_data.split_first() {
-           Some((0,data))=>{},
-           Some((1,data))=>{},
+           Some((0,data))=>{create_state(_program_id, accounts, data).unwrap()},
+           Some((1,_))=>{increment_state(accounts).unwrap()},
            _=>return Err(ProgramError::InvalidInstructionData)
        }
        Ok(())
