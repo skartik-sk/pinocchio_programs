@@ -1,0 +1,21 @@
+{
+    "name": "kit-tutorial",
+    "version": "1.0.0",
+    "scripts": {
+        "start": "tsx index.ts",
+        "validator": "solana-test-validator",
+        "generate": "bun run ./generate-codama.ts"
+    },
+    "dependencies": {
+        "@codama/nodes": "^1.5.0",
+        "@codama/nodes-from-anchor": "^1.3.8",
+        "@codama/renderers": "^1.0.34",
+        "@solana/kit": "^5.1.0",
+        "bs58": "^6.0.0",
+        "ts-node": "^10.9.2",
+        "tsx": "^4.21.0"
+    },
+    "devDependencies": {
+        "@types/node": "^25.0.3"
+    }
+}
